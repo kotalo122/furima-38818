@@ -50,19 +50,18 @@
 
 - belongs_to :item
 - belongs_to :user
-- has_one :shipments
+- has_one :shipment
 
 ## shipments テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| shipment      | references | null: false, foreign_key: true |
+| oder          | references | null: false, foreign_key: true |
 | post_code     | string     | null:false                     |
 | prefecture_id | integer    | null:false                     |
 | city          | string     | null:false                     |
 | block         | string     | null:false                     |
-| building      | string     | null:false                     |
-| address       | string     | null:false                     |
+| building      | string     |                                |
 | phone         | string     | null:false                     |
 
 ### Association
