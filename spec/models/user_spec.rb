@@ -100,13 +100,18 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
-      it "passwordは英数字混合でないと登録できない" do
+      it "passwordは数字だけでは登録できない" do
         @user.password = "000000"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it "passwordは英数字混合でないと登録できない" do
+      it "passwordは英語だけでは登録できない" do
         @user.password = "aaaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it "passwordは全角文字は登録できない" do
+        @user.password = "ｄddddd"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
@@ -115,14 +120,14 @@ RSpec.describe User, type: :model do
       it 'last_nameが空では登録できない' do
         @user.last_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name can't be blank", "Last name は全角で入力してください")
+        expect(@user.errors.full_messages).to include("Last name can't be blank", "Last name 全角文字を使用してください")
       end
 
       # first_nameについて
       it 'first_nameが空では登録できない' do
         @user.first_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name can't be blank", "First name は全角で入力してください")
+        expect(@user.errors.full_messages).to include("First name can't be blank", "First name 全角文字を使用してください")
       end
       # last_name_kanaについて
       it 'last_name_kanaが空では登録できない' do
