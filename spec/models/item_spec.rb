@@ -34,7 +34,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "category_idに「---」が選択されている場合は出品できない" do
-          @item.category_id = '---'
+          @item.category_id = '1'
           @item.valid?
           expect(@item.errors.full_messages).to include("Category Category can't be blank")
         end
@@ -46,7 +46,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "condition_idに「---」が選択されている場合は出品できない" do
-          @item.condition_id = '---'
+          @item.condition_id = '1'
           @item.valid?
           expect(@item.errors.full_messages).to include("Condition Condition can't be blank")
         end
@@ -58,7 +58,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "shipping_fee_idに「---」が選択されている場合は出品できない" do
-          @item.shipping_fee_id = '---'
+          @item.shipping_fee_id = '1'
           @item.valid?
           expect(@item.errors.full_messages).to include("Shipping fee Shipping fee can't be blank")
         end
@@ -70,7 +70,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "prefecture_idに「---」が選択されている場合は出品できない" do
-          @item.prefecture_id = '---'
+          @item.prefecture_id = '1'
           @item.valid?
           expect(@item.errors.full_messages).to include("Prefecture Prefecture can't be blank")
         end
@@ -82,7 +82,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "ship_day_idに「---」が選択されている場合は出品できない" do
-          @item.ship_day_id = '---'
+          @item.ship_day_id = '1'
           @item.valid?
           expect(@item.errors.full_messages).to include("Ship day Ship_day can't be blank")
         end
