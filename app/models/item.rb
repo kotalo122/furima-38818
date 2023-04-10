@@ -6,10 +6,11 @@ class Item < ApplicationRecord
     validates :category_id,     numericality: { other_than: 1 , message: "Category can't be blank"}
     validates :condition_id,    numericality: { other_than: 1 , message: "Condition can't be blank"}
     validates :price, numericality: {
+      only_integer: true,
       greater_than_or_equal_to: 300,
       less_than_or_equal_to: 9_999_999,
       message: 'must be between ¥300 and ¥9,999,999'
-    }, format: { with: /\A[0-9]+\z/, message: 'must be a half-width number' }
+    }
     validates :shipping_fee_id, numericality: { other_than: 1 , message: "Shipping fee can't be blank"}
     validates :prefecture_id,   numericality: { other_than: 1 , message: "Prefecture can't be blank"}
     validates :ship_day_id,     numericality: { other_than: 1 , message: "Ship_day can't be blank"}
