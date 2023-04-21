@@ -1,30 +1,33 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :set_item, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
+    @order_shipment = OrderShipment.new
   end
 
   def create
-    binding.pry
-    @order = Order.create(order_params)
-    Shipment.create(shipment_params)
-    redirect_to root_path
+    @order_shipment = OrderShipment.new(order_params)
+    if @order_shipment.valid?
+       @order_shipment.save
+       redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:user_id, :item_id)
+    params.require(:order_shipment).permit(:address, :post_code, :prefecture_id, :city, :block, :building, :phone).merge(user_id: current_user.id, item_id: @item.id )
   end
   
-  def shipment_params
-    params.require(:shipment).permit(:order_id, :address, :post_code, :prefecture_id, :city, :block, :building, :phone).merge(order_id: @order.id)
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
   def move_to_index
-    @item = Item.find(params[:item_id])
     if current_user == @item.user
       redirect_to item_path(@item.id)
     end
