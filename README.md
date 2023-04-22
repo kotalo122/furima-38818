@@ -61,7 +61,7 @@
 | prefecture_id | integer    | null:false                      |
 | city          | string     | null:false                      |
 | block         | string     | null:false                      |
-| building      | string     |                                 |
+| building_name | string     |                                 |
 | phone         | string     | null:false                      |
 
 ### Association

@@ -19,17 +19,17 @@ class OrdersController < ApplicationController
 
   private
 
-  def order_params
-    params.require(:order_shipment).permit(:address, :post_code, :prefecture_id, :city, :block, :building, :phone).merge(user_id: current_user.id, item_id: @item.id )
-  end
-  
   def set_item
     @item = Item.find(params[:item_id])
   end
 
+  def order_params
+    params.require(:order_shipment).permit(:post_code, :prefecture_id, :city, :block, :building_name, :phone).merge(user_id: current_user.id, item_id: @item.id )
+  end
+
   def move_to_index
     if current_user == @item.user
-      redirect_to item_path(@item.id)
+      redirect_to root_path
     end
   end
 end
