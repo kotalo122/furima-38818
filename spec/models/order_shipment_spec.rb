@@ -61,6 +61,18 @@ RSpec.describe OrderShipment, type: :model do
         expect(@order_shipment.errors.full_messages).to include("Phone can't be blank")
       end
 
+      it 'phoneが9桁以内だと保存できないこと' do
+        @order_shipment.phone  = '090111222'
+        @order_shipment.valid?
+        expect(@order_shipment.errors.full_messages).to include("Phone is too short (minimum is 10 characters)")
+      end
+
+      it 'phoneが12桁以上だと保存できないこと' do
+        @order_shipment.phone  = '090111122223'
+        @order_shipment.valid?
+        expect(@order_shipment.errors.full_messages).to include("Phone is too long (maximum is 11 characters)")
+      end
+
       it 'phoneにハイフンが含まない正しい形式でないと保存できないこと' do
         @order_shipment.phone  = '090-0000-1111'
         @order_shipment.valid?
