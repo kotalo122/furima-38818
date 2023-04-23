@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   
   def index
     @items = Item.order(created_at: :desc)
+
   end
 
   def new
@@ -49,7 +50,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless current_user == @item.user
+    unless current_user == @item.user && !@item.order.present?
       redirect_to action: :index
     end
   end
