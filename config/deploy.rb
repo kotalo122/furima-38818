@@ -1,5 +1,6 @@
 lock '3.17.2'
 
+set :branch, 'main'
 set :application, 'furima-38818'
 
 set :repo_url,  'git@github.com:kotalo122/furima-38818.git'
